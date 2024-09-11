@@ -1,3 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using NET_Trainee_Test_MVC.Models.Persistence;
+using NET_Trainee_Test_MVC.Models.Repositories.Interfaces.Base;
+using NET_Trainee_Test_MVC.Models.Repositories.Realizations.Base;
+
 namespace NET_Trainee_Test_MVC
 {
     public class Program
@@ -8,6 +14,11 @@ namespace NET_Trainee_Test_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<CsvDBContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
             var app = builder.Build();
 

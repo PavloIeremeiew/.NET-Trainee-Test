@@ -1,8 +1,63 @@
-﻿@{
+﻿@using NET_Trainee_Test_MVC.Models.Entities
+@{
     ViewData["Title"] = "Home Page";
 }
+@model IEnumerable<Person>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div>
+    <input type="text" id="searchName" placeholder="Search by name" />
+    <button onclick="filterByName()">filter</button>
+    <table id="personTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>BirthDay</th>
+                <th>Is Married</th>
+                <th>Phone</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model)
+            {
+                string isMarried = person.IsMarried ? "Yes" : "No";
+                <tr>
+                    <td>@person.Id</td>
+                    <td>@person.Name</td>
+                    <td>@person.BirthDay.ToString("dd.MM.yyyy")</td>
+                    <td>@isMarried</td>
+                    <td>@person.Phone</td>
+                    <td>@person.Salary</td>
+                    <td>
+                        <form asp-controller="Home" asp-action="Update" method="get">
+                            <input type="hidden" name="id" value=@person.Id />
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Home" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value=@person.Id />
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <form asp-controller="Home" asp-action="Create" enctype="multipart/form-data" method="get">
+            <button type="submit">Create</button>
+        </form>
+        <form asp-controller="Home" asp-action="Upload" enctype="multipart/form-data" method="post">
+            <input type="file" name="file" />
+            <button type="submit">Upload</button>
+        </form>
+        <form asp-controller="Home" asp-action="DownloadFile" method="post">
+            <button type="submit">Download File</button>
+        </form>
+    </div>
+
+    <script src="js/site.js"></script>
 </div>

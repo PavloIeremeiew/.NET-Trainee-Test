@@ -1,4 +1,16 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function filterByName() {
+    var searchName = document.getElementById("searchName").value.toLowerCase();
 
-// Write your JavaScript code.
+    var rows = document.getElementById("personTable").rows;
+    for (var i = 1; i < rows.length; i++) {
+        var row = rows[i];
+        var nameCell = row.cells[1];
+        var name = nameCell.textContent.toLowerCase();
+
+        if (name.indexOf(searchName) > -1) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    }
+}
