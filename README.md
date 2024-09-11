@@ -24,5 +24,5 @@ What can be added:
 * Styles
 * Implement MediatoR
 * Validation
-* 
+ 
 Completed in: `~5 hours`
