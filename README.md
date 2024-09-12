@@ -24,5 +24,6 @@ What can be added:
 * Styles
 * Implement MediatoR
 * Validation
+* Unit Tests
  
 Completed in: `~5 hours`
